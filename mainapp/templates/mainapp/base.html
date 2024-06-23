@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+
+    {% block style_links %}
+    {% endblock style_links %}
+
+</head>
+<body>
+    <header class="header">
+            <div class="container">
+                <div class="header__logo">slvnv photo</div>
+                <div class="header__menu">
+                    <a href="{% url 'mainapp:index' %}">Main</a>
+                    <a href="{% url 'mainapp:photos' %}">Photos</a>
+                    <a href="#">About me</a>
+                </div>
+                <div class="header__buttons">
+                    <div class="header__buttons__signin">
+                        <a href="#"><button>Sign in</button></a>
+                    </div>
+                    <div class="header__buttons__signup">
+                        <a href="#"><button>Sign up</button></a>
+                    </div>
+                </div>
+            </div>
+        </header>
+    {% block main_content %}
+    {% endblock main_content %}
+
+{#    <script src="{% static 'mainapp/js/script.js' %}"></script>#}
+</body>
+</html>

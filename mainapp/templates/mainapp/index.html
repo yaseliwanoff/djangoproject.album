@@ -1,0 +1,56 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block style_links %}
+	<link rel="stylesheet" href="{% static 'mainapp/style/index.css' %}">
+{% endblock style_links %}
+
+{% block main_content %}
+	<main class="main">
+        <div class="container">
+            <div class="main__blocks">
+                <div class="left__block">
+                    {% if user.is_authenticated %}
+                        <div class="left__block__title">Hello {{ user.username }}</div>
+                        <div class="left__block__subtitle">This is a website where you and other users can publish your interesting pictures that you want to share with the community, share photos and see the results of other users of this website</div>
+                    {% else %}
+                        <div class="left__block__title">Hello user</div>
+                        <div class="left__block__subtitle">This is a website where you and other users can publish your interesting pictures that you want to share with the community, share photos and see the results of other users of this website</div>
+                    {% endif %}
+                </div>
+                <div class="right__block">
+                    <div class="right__block__title">
+                        BEST PHOTO COLLECTION
+                    </div>
+                </div>
+            </div>
+            <div class="main__buttons">
+                <div class="main__buttons__allPhotos">
+                    <a href="{% url 'mainapp:photos' %}"><button>All photos</button></a>
+                </div>
+                <div class="main__buttons__myPhotos">
+                    <a href="#"><button>My photos</button></a>
+                </div>
+                <div class="main__buttons__bestPhotos">
+                    <a href="#"><button>Best photos</button></a>
+                </div>
+            </div>
+            {% for photo in photos %}
+                {% if photo.exists %}
+                    <div class="main__photos">
+                        <div class="main__photo">
+                            <div class="main__photo__img">
+                                <a href="#"><img src="{{ photo.image.url }}" alt="photo image"></a>
+                            </div>
+                            <div class="main__photo__text">
+                                <div class="main__photo__text__title">{{ photo.title }}</div>
+                                <div class="main__photo__text__subtitle">{{ photo.low_descrtiption|truncatechars:100 }}</div>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <h1>NO PHOTOS</h1>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+{% endblock main_content %}
